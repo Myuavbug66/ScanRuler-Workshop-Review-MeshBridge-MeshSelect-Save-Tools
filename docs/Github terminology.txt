@@ -1,0 +1,33 @@
+GitHub terminology
+==================
+
+This customized project is a fork: an independently maintained version of
+the original ScanRuler project.
+
+Suggested project description
+-----------------------------
+An unofficial community fork of CNC Kitchen's ScanRuler, adding mesh
+bridging, visible-surface selection/deletion, improved saving and exports,
+and a standalone Windows installer.
+
+Common terms
+------------
+Fork: Your independently maintained version hosted in your GitHub account.
+
+Branch: A development track within a repository.
+
+Release: A packaged version of the project, such as the Windows installer.
+
+Pull request: A proposal to merge your improvements into the original project.
+
+Contributor: Someone who contributes code, documentation or other improvements.
+
+Collaborator: Someone granted access permissions by the repository owner.
+Publishing a fork or submitting a pull request does not automatically make
+you a collaborator on the original project.
+
+Typical next steps
+------------------
+Publish your changes to your GitHub fork, then optionally create a release
+containing the installer. Submitting improvements to the original project
+is a separate step, normally through a pull request.

@@ -46,7 +46,8 @@ const workspaceTabs = () => [
 ]
 
 /** The page's own title, while no project is named. */
-const APP_TITLE = 'ScanRuler by CNC Kitchen'
+const REVIEW_NAME = (import.meta.env.VITE_REVIEW_NAME as string | undefined) || 'ScanRuler Workshop Review'
+const APP_TITLE = REVIEW_NAME || 'ScanRuler by CNC Kitchen'
 
 /** The project's name, typed in place — what Save Project saves it under,
  *  every export is named on and the browser tab reads. Unnamed, those go by
@@ -60,7 +61,7 @@ function ProjectName() {
   const [typed, setTyped] = useState<string | null>(null)
   const dropped = useRef(false)
   useEffect(() => {
-    document.title = name ? `${name} — ScanRuler` : APP_TITLE
+    document.title = name ? `${name} — ${REVIEW_NAME || 'ScanRuler'}` : APP_TITLE
   }, [name])
   const shown = typed ?? name ?? ''
   const fallback = projectStem(null, fileName, imageName)
@@ -199,14 +200,14 @@ export function TopBar({
 
   return (
     <header className="top" ref={barRef}>
-      <img className="brandmark" src="/scanruler-mark.svg" alt="" />
+      {!REVIEW_NAME && <img className="brandmark" src="/scanruler-mark.svg" alt="" />}
       {/* The version rides in the caption, and in the tooltip for the narrow
           layouts that drop the caption: a bug report needs the number, and
           the imprint carries it too. */}
       <div className="brand" title={`ScanRuler v${APP_VERSION}`}>
-        <b>ScanRuler</b>
+        <b>{REVIEW_NAME || 'ScanRuler'}</b>
         <span>
-          CNC Kitchen · 3D scan analysis ·{' '}
+          {REVIEW_NAME ? 'Unofficial experimental fork - not approved by CNC Kitchen' : 'CNC Kitchen · 3D scan analysis'} ·{' '}
           <i className="ver" data-test="app-version">
             v{APP_VERSION}
           </i>
