@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 import { create } from 'zustand'
+import { useTaskActivity } from '../../../src/state/taskActivity'
 
 interface DeleteState {
   mode: 'visible' | 'through'
@@ -28,7 +29,12 @@ export const useDeleteSelection = create<DeleteState>((set) => ({
   stage: 0,
   selecting: false,
   progress: null,
-  setProgress: (progress) => set({ selecting: progress !== null, progress }),
+  setProgress: (progress, percent) => {
+    useTaskActivity.getState().setTask('mesh-visible-selection', progress === null ? null : {
+      text: progress, percent: percent ?? null,
+    })
+    set({ selecting: progress !== null, progress })
+  },
   setMode: (mode) => set({ mode, gesture: null, selection: null, count: 0, stage: 0 }),
   setGesture: (gesture) => set({ gesture, stage: 0 }),
   setRemove: (remove) => set({ remove, stage: 0 }),
@@ -39,6 +45,7 @@ export const useDeleteSelection = create<DeleteState>((set) => ({
   }),
   setStage: (stage) => set({ stage }),
   reset: () => {
+    useTaskActivity.getState().setTask('mesh-visible-selection', null)
     set({ gesture: null, selection: null, count: 0, stage: 0, selecting: false, progress: null })
   },
 }))
